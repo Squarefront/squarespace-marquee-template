@@ -1,0 +1,60 @@
+{.section items}
+  <nav class="secondary-nav">
+      <div class="nav-wrapper">
+        <ul class="cf">
+        {.repeated section @}
+
+          {.collection?}
+            <li class="{collection.typeLabel}-collection{.section active} active-link{.end}{.if collection.folder} folder{.end}{.if folderActive} active-link active-folder{.end}">
+
+            {.index?}
+                <a href="{collection.fullUrl}"><span>{collection.navigationTitle}</span></a>
+            {.or folder?}
+
+                  <!--FOLDER-->
+
+                  <div class="folder-parent">
+                    <input type="checkbox" name="folder-toggle-{collection.id}" id="folder-toggle-{collection.id}" class="folder-toggle-box hidden" />
+                    <label for="folder-toggle-{collection.id}" class="folder-toggle-label"><a aria-haspopup="true"><span>{collection.navigationTitle}</span></a></label>
+                    
+                    <div class="folder-child-wrapper">
+                      <ul class="folder-child">
+                        {.repeated section items}
+
+                          {.collection?}
+                            <li class="{.section active} active-link{.end}">
+                              <a href="{collection.fullUrl}">
+                                <span>{collection.navigationTitle}</span>
+                              </a>
+                            </li>
+                          {.end}
+
+                          {.section externalLink}
+                            <li>
+                              <a href="{url}"{.section newWindow} target="_blank"{.end}>
+                                <span>{title}</span>
+                              </a>
+                            </li>
+                          {.end}
+                        {.end}
+
+                      </ul>
+                    </div>
+                  </div>
+            {.or}
+              <a href="{collection.fullUrl}"><span>{collection.navigationTitle}</span></a>
+            {.end}
+            </li>
+          {.end}
+
+          {.section externalLink}
+            <li class="external-link">
+              <a href="{url}"{.section newWindow} target="_blank"{.end}><span>{title}</span></a>
+            </li>
+          {.end}
+            
+        {.end}
+      </ul>
+    </div>
+  </nav>
+{.end}

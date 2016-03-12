@@ -1,0 +1,304 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    {.if template.mobileStylesEnabled}
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {.end}
+    {squarespace-headers}
+    <script>
+      Y.Squarespace.FollowButtonUtils = {};
+      Y.Squarespace.FollowButtonUtils.renderAll = function(){};
+    </script>
+  </head>
+
+  <body id="{squarespace.page-id}" class="{squarespace.page-classes}{.if item}{.section item}{.main-image?} has-banner-image{.end}{.end}{.or}{.section collection}{.equal? typeName "index"}{.section collections}{.section 0}{.section mainImage} has-banner-image{.end}{.end}{.end}{.or}{.equal? typeName "album"}{.or}{.equal? typeName "gallery"}{.or}{.section mainImage} has-banner-image{.end}{.end}{.end}{.end}{.end}{.end} {.if template.mobileStylesEnabled}{.or}mobile-styles-disabled{.end}">
+
+    <div id="mobileNav" data-content-field="navigation-mobileNav">
+      <squarespace:navigation navigationId="mainNav" template="navigation" />
+    </div>
+
+    <div class="site-wrapper">
+      <div class="site-inner-wrapper">
+      <!--CONTENT INJECTION POINT-->
+      {.if item}
+        <div id="header-wrapper">
+          <header id="header" class="sqs-announcement-bar-dropzone">
+            <div class="title-nav-wrapper">
+              {.section website}
+              <h1 data-content-field="site-title" data-annotation-alignment="bottom" class="site-title">
+                <a href="/" id="top">
+                {.section logoImageUrl}
+                  <img src="{logoImageUrl}?format=400w" alt="{siteTitle}" />
+                {.or}
+                  {siteTitle}
+                {.end}
+                </a>
+              </h1>
+              {.end}
+              <a class="icon-menu" id="mobileMenu"></a>
+              <!--MAIN NAVIGATION-->
+              <div id="desktopNav" data-content-field="navigation-mainNav" data-annotation-alignment="bottom left">
+                <squarespace:navigation navigationId="mainNav" template="navigation" />
+              </div>
+            </div>
+          </header>
+        {.section item}
+          {.main-image?}
+          <div class="banner-image content-fill">
+            <img {@|image-meta} />
+            <div class="image-overlay-wrapper"></div>
+          </div>
+          {.end}
+          <div class="title-desc-wrapper{.main-image?} has-main-image{.or} no-main-image{.end}" data-content-field="main-image">
+            <div class="title-desc-inner" data-collection-id="{id}">
+              {.if startDate}
+              <div class="page-title-wrapper"><h1 class="page-title" data-content-field="title">{title}</h1></div>
+              <br> <!-- this keeps the inline-blocks from collapsing -->
+              <div class="page-desc">
+                <p class="event-time">
+                  <time class="event-meta-heading">{startDate|date %A, %B %e, %Y}{.same-day?}{.or}{.if endDate} &ndash; {endDate|date %A, %B %e, %Y}{.end}{.end}</time><br>
+                  <time class="event-time-12hr"></span>{startDate|date %l:%M%P}{.same-day?}{.if endDate} &ndash; {endDate|date %l:%M%P}{.end}{.end}</time>
+                  <time class="event-time-24hr"></span>{startDate|date %H:%M}{.same-day?}{.if endDate} &ndash; {endDate|date %H:%M}{.end}{.end}</time>
+                </p>
+              </div>
+              {.or}
+              {.if productType}
+              <div class="page-title-wrapper"><h1 class="page-title">{title}</h1></div>
+              <br> <!-- this keeps the inline-blocks from collapsing -->
+              {.if excerpt}<div class="page-desc">{excerpt}</div>{.end}
+              {.or}
+              <div class="page-title-wrapper"><h1 class="page-title">
+                {.passthrough?}
+                <a href="{sourceUrl}" class="entry-title-passthrough" target="_blank">{title}</a>
+                {.or}
+                {title}
+                {.end}
+              </h1></div>
+              <br> <!-- this keeps the inline-blocks from collapsing -->
+              <div class="page-desc">
+                <p class="date entry-author">
+                  <time class="published" datetime="{addedOn|date %F}">{addedOn|date %B %e, %Y}</time>{.section author}
+                  <span class="author-name"><br>
+                    <em>by</em> <a href="{collection.fullUrl}?author={author.id}">{displayName}</a>
+                  </span>{.end}
+                </p>
+              </div>
+              {.end}
+            {.end}
+            </div>
+          </div>
+        </div>
+
+        <section id="content-wrapper">
+          <div class="sqs-cart-dropzone"></div>
+          <div class="content">
+
+            <div class="content-inner" data-content-field="main-content">
+              {squarespace.main-content}
+            </div>
+            {.if categories || tags || sourceUrl || pagination}
+            <footer class="entry-footer clear">
+              <div class="outer-wrapper">
+                <div class="wrapper">
+                  {.if categories || tags || sourceUrl}
+                  <div class="entry-meta">
+                    {.section categories}<div><em>{.equal? collection.typeName "products"}Found{.or}Posted{.end} in</em> {.repeated section @}<a href="{collection.fullUrl}?category={@|url-encode}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+                    {.if categories && tags} <em>and</em> {.end}
+                    {.section tags}<div><em>tagged with</em> {.repeated section @}<a href="{collection.fullUrl}?tag={@|url-encode}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+                    {.passthrough?}
+                    {.or}
+                    {.section sourceUrl}<div class="source-url"><a href="{sourceUrl}" target="_blank">Source</a></div>{.end}
+                    {.end}
+                  </div>
+                  {.end}
+
+                  {.if pagination}
+                  <nav class="pagination cf">
+                    {.if startDate}
+                    <a href="{collection.fullUrl}" class="back-to-all">Back to All</a>
+                    {.if pagination.prevItem}<div class="newer"><a href="{pagination.prevItem.fullUrl}">Previous</a></div>{.or}<div class="newer mute">Previous</div>{.end}
+                    {.if pagination.nextItem}<div class="older"><a href="{pagination.nextItem.fullUrl}">Next</a></div>{.or}<div class="older mute">Next</div>{.end}
+                    {.or}
+                    {.if productType}
+                    <a href="{collection.fullUrl}" class="back-to-all">Back to All</a>
+                    {.if pagination.prevItem}<div class="newer"><a href="{pagination.prevItem.fullUrl}">Previous</a></div>{.or}<div class="newer mute">Previous</div>{.end}
+                    {.if pagination.nextItem}<div class="older"><a href="{pagination.nextItem.fullUrl}">Next</a></div>{.or}<div class="older mute">Next</div>{.end}
+                    {.or}
+                    {.if pagination.prevItem}<div class="newer"><a href="{pagination.prevItem.fullUrl}">Newer</a></div>{.or}<div class="newer mute">Newer</div>{.end}
+                    {.if pagination.nextItem}<div class="older"><a href="{pagination.nextItem.fullUrl}">Older</a></div>{.or}<div class="older mute">Older</div>{.end}
+                    {.end}
+                    {.end}
+                  </nav>
+                  {.end}
+                </div>
+              </div>
+            </footer>
+            {.end}
+          </div>
+        </section>
+        {.end}
+        {.or}
+        {.index?}
+        <header id="header" class="sqs-announcement-bar-dropzone">
+          <div class="title-nav-wrapper">
+            {.section website}
+            <h1 data-content-field="site-title" class="site-title" data-annotation-alignment="bottom">
+              <a href="/" id="top">
+                {.section logoImageUrl}
+                 <img src="{logoImageUrl}?format=400w" alt="{siteTitle}" />
+                {.or}
+                  {siteTitle}
+                {.end}
+              </a>
+            </h1>
+            <a class="icon-menu" id="mobileMenu"></a>
+            {.end}
+            <!--MAIN NAVIGATION-->
+            <div id="desktopNav" data-content-field="navigation-mainNav" data-annotation-alignment="bottom left">
+              <squarespace:navigation navigationId="mainNav" template="navigation" />
+            </div>
+          </div>
+        </header>
+        <section id="content-wrapper" data-content-field="main-content">
+          <div class="sqs-cart-dropzone"></div>
+          {squarespace.main-content}
+          <div class="back-to-top"></div>
+        </section>
+        {.or}
+        <div id="header-wrapper">
+          <header id="header" class="sqs-announcement-bar-dropzone">
+            <div class="title-nav-wrapper">
+              {.section website}
+              <h1 data-content-field="site-title" class="site-title">
+                <a href="/" id="top">
+                  {.section logoImageUrl}
+                   <img src="{logoImageUrl}?format=400w" alt="{siteTitle}" />
+                  {.or}
+                    {siteTitle}
+                  {.end}
+                </a>
+              </h1>
+              <a class="icon-menu" id="mobileMenu"></a>
+              {.end}
+              <!--MAIN NAVIGATION-->
+              <div id="desktopNav" data-content-field="navigation-mainNav" data-annotation-alignment="bottom left">
+                <squarespace:navigation navigationId="mainNav" template="navigation" />
+              </div>
+            </div>
+          </header>
+
+          {.section collection}
+          {.equal? typeName "gallery"}
+          {.or}
+          {.equal? typeName "album"}
+          {.or}
+          {.section mainImage}
+          <div class="banner-image content-fill">
+            <img {@|image-meta} />
+            <div class="image-overlay-wrapper"></div>
+          </div>
+          {.end}
+          <div class="title-desc-wrapper{.main-image?} has-main-image{.or} no-main-image{.end}{.if description}{.or} no-description{.end}">
+            <div class="title-desc-inner" data-collection-id="{id}" data-edit-main-image="Background">
+              <div class="page-title-wrapper"><h1 class="page-title" data-content-field="title">{title}</h1></div>
+              <br> <!-- this keeps the inline-blocks from collapsing -->
+              <div class="page-desc" data-content-field="description">{description}</div>
+            </div>
+          </div>
+          {.end}
+          {.end}
+        {.end}
+        </div>
+
+        <section id="content-wrapper">
+          <div class="sqs-cart-dropzone"></div>
+          <div class="content">
+            <div class="content-inner" data-content-field="main-content">
+            {squarespace.main-content}
+            </div>
+            {.section collection}
+              {.equal? typeName "events"}
+              {.or}
+                {.if pagination}
+            <footer class="entry-footer clear">
+              <div class="outer-wrapper">
+                <div class="wrapper">
+                  <nav class="pagination cf">
+                    {.if pagination.prevPage}<div class="newer"><a href="{pagination.prevPageUrl}">Newer</a></div>{.or}<div class="newer mute">Newer</div>{.end}
+                    {.if pagination.nextPage}<div class="older"><a href="{pagination.nextPageUrl}">Older</a></div>{.or}<div class="older mute">Older</div>{.end}
+                  </nav>
+                </div>
+              </div>
+            </footer>
+                {.end}
+              {.end}
+            {.end}
+          </div>
+        </section>
+        {.end}
+      {.end}
+
+      {.section collection}{.equal? typeName "products"}
+        {.section categories}
+        <footer id="categoryNav" class="entry-footer clear">
+          <div class="outer-wrapper">
+            <input type="checkbox" name="category-nav-toggle" id="categoryNavToggle" class="category-nav-toggle hidden" />
+            <label for="categoryNavToggle" class="category-nav-toggle-label" onclick></label>
+            <nav class="category-nav">
+              <ul class="category-nav-links">
+                <li{.if categoryFilter}{.or} class="active-link all"{.end}><a href="{fullUrl}">All</a></li>
+                {.repeated section @}
+                <li{.equal? categoryFilter @} class="active-link"{.end}><a href="{fullUrl}?category={@|url-encode}">{@}</a></li>
+                {.end}
+              </ul>
+            </nav>
+          </div>
+        </footer>
+        {.end}
+      {.end}{.end}
+
+        <!--FOOTER WITH OPEN BLOCK FIELD-->
+        <footer id="footer">
+          <div class="back-to-top-link"><a href="#top"><span class="arrow"></span>Top</a></div>
+          <div class="footer-wrapper">
+            <div id="secondaryNav" data-content-field="navigation-secondaryNav">
+              <squarespace:navigation navigationId="secondaryNav" template="secondary-navigation" />
+            </div>
+            <squarespace:block-field id="footerBlocks" columns="12" label="Footer Content" />
+          </div>
+        </footer>
+
+      {squarespace-footers}
+      <squarespace:script src="rafscroll.js" combo="true" />
+      <squarespace:script src="mutation-observer.js" combo="true" />
+      <squarespace:script src="site.js" combo="true" />
+      </div>
+    </div>
+
+  {.if template.mobileStylesEnabled}{.or}
+  <script>
+    Y.use('node', function() {
+      Y.on('domready', function() {
+        var move;
+        Y.all('.folder-child-wrapper a').each(function(a) {
+          a.on('touchstart', function() {
+            move = false;
+          });
+          a.on('touchmove', function() {
+            move = true;
+          });
+          a.on('touchend', function() {
+            if (move === false) {
+              window.location = a.getAttribute('href');
+            }
+          });
+        });
+      });
+    });
+  </script>
+  {.end}
+  </body>
+</html>

@@ -1,0 +1,301 @@
+
+
+/* HEADER
+---------------------------------------------------*/
+
+// tweak: { "category" : "Site Header", "title" : "Header Background Color", "label" : "Background Color", "type" : "color", "js" : true, "target" : "#header" }
+@headerBgColor: #ffffff;
+
+// tweak: { "category" : "Site Header", "title" : "Fixed Header", "label" : "Fixed Position", "type" : "checkbox", "active" : false, "js": true, "target" : "#header" }
+
+// tweak: { "category" : "Site Header", "title" : "Transparent Header", "label" : "Transparent on Banner Images", "type" : "checkbox", "active" : false, "js" : true, "target" : "#header" }
+
+// tweak: { "category" : "Site Header", "title" : "Site Title Font", "type" : "font", "target" : "#header h1.site-title" }
+.site-title-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 12px;
+  text-decoration: none; 
+}
+
+// tweak: { "category" : "Site Header", "title" : "Site Title Color", "type" : "color", "target" : "#header h1.site-title" }
+@siteTitleColor: #2b2b2b;
+
+
+
+/* NAVIGATION
+---------------------------------------------------*/
+
+// tweak: { "category" : "Site Navigation", "title" : "Navigation Font", "type" : "font", "target" : ".main-nav ul li" }
+.nav-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 0.85em;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+
+// tweak: { "category" : "Site Navigation", "title" : "Nav Link Color", "type" : "color", "target" : ".main-nav ul li" }
+@navColor: #1a1a1a;
+
+// tweak: { "category" : "Site Navigation", "title" : "Nav Active Color", "type" : "color", "target" : ".main-nav ul li" }
+@navActiveColor: #c2c2c2;
+
+
+
+/* PARALLAX IMAGES
+---------------------------------------------------*/
+
+// tweak: { "category" : "Parallax Images", "title" : "Parallax Scrolling", "type" : "checkbox", "active" : "true", "js": "true", "target" : ".collection-type-index .title-desc-image", "showOnlyWhenPresent" : ".collection-type-index, .banner-image" }
+
+// tweak: { "category" : "Parallax Images", "title" : "Hide Parallax Nav", "type" : "checkbox", "active" : false, "target" : "#parallax-nav", "showOnlyWhenPresent" : ".collection-type-index.parallax-scrolling" }
+
+// tweak: { "category" : "Parallax Images", "title" : "First Index Image Fullscreen", "type" : "checkbox", "active" : "true", "js" : "true", "target" : ".collection-type-index .title-desc-image", "showOnlyWhenPresent" : ".collection-type-index:not(.index-image-height-fullscreen)" }
+
+// tweak: { "category" : "Parallax Images", "title" : "Index Image Height", "type" : "dropdown", "options" : [ "Fullscreen", "Half", "Two Thirds" ], "default" : "Two Thirds", "js" : "true", "target" : ".collection-type-index .title-desc-image", "showOnlyWhenPresent" : ".collection-type-index" }
+
+// tweak: { "category" : "Parallax Images", "title" : "Image Overlay", "type" : "checkbox", "active" : "false", "target" : ".title-desc-image, .banner-image" }
+
+// tweak: { "category" : "Parallax Images", "title" : "Image Overlay Color", "type" : "color", "target" : ".title-desc-image, .banner-image", "showOnlyWhenPresent" : ".image-overlay" }
+@imageOverlayColor: rgba(0,0,0,0.4);
+
+
+
+/* Page Titles & Descriptions
+---------------------------------------------------*/
+
+// tweak: { "category" : "Page Title & Description", "title" : "Page Title Font", "type" : "font", "loadAllVariants" : "true", "target" : ".title-desc-wrapper h1.page-title" }
+.page-title-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 39px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 7px;
+  line-height: 1em;
+  text-decoration: none;
+}
+
+// tweak:{ "category" : "Page Title & Description", "title" : "Page Description Font", "label" : "Description Font", "type" : "font", "loadAllVariants" : "true", "target" : ".title-desc-wrapper .page-desc p" }
+.page-description-font {
+  font-family: "PT Serif", serif;
+  font-size: 17px;
+  font-weight: 400;
+  text-transform: none;
+  font-style: normal;
+  letter-spacing: 1px;
+  line-height: 1.6em;
+  text-decoration: none;
+}
+
+// tweak: { "category" : "Page Title & Description", "title" : "Description Text Color", "type" : "color", "target" : ".title-desc-wrapper .page-desc p", "showOnlyWhenPresent" : ".title--description-position-over-image" }
+@descriptionTextColor: #171717;
+
+// tweak: { "category" : "Page Title & Description", "title" : "Description Background Color", "type" : "color", "target" : ".title-desc-wrapper .page-desc", "showOnlyWhenPresent" : ".title--description-position-over-image.title-background" }
+@descriptionBgColor: #ffffff;
+
+// tweak: { "category" : "Page Title & Description", "title" : "Hide Page Title", "type" : "checkbox", "active" : "false", "target" : ".title-desc-wrapper h1.page-title" }
+
+// tweak: { "category" : "Page Title & Description", "title" : "Title Text Color", "type" : "color", "target" : ".title-desc-wrapper h1.page-title", "showOnlyWhenPresent" : "body:not(.hide-page-title)" }
+@titleTextColor: #171717;
+
+// tweak: { "category" : "Page Title & Description", "title" : "Title Background Color", "type" : "color", "target" : ".title-desc-wrapper h1.page-title", "showOnlyWhenPresent" : "body:not(.hide-page-title)" }
+@titleBgColor: #ffffff;
+
+// tweak: { "category" : "Page Title & Description", "title" : "Title & Description Alignment", "type" : "dropdown", "options" : [ "Left", "Center" ], "default" : "Left", "target" : ".title-desc-inner" }
+
+// tweak: { "category" : "Page Title & Description", "title" : "Title & Description Position", "type" : "dropdown", "options" : [ "Over Image", "Under Image" ], "default" : "Over Image", "target" : ".title-desc-inner" }
+
+// tweak: { "category" : "Page Title & Description", "title" : "Title Background", "type" : "checkbox", "active" : "true", "target" : ".title-desc-inner", "showOnlyWhenPresent" : ".title--description-position-over-image" }
+
+// tweak: { "category" : "Page Title & Description", "title" : "Extra Description Formatting", "type" : "checkbox", "active" : false, "target" : ".title-desc-inner", "showOnlyWhenPresent" : ".title--description-position-over-image" }
+
+// tweak:{ "category" : "Page Title & Description", "title" : "Description Bold Font", "type" : "font", "loadAllVariants" : "true", "showOnlyWhenPresent" : ".extra-description-formatting .page-desc p > strong", "target" : ".title-desc-wrapper .page-desc p > strong" }
+.desc-bold-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 36px;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1em;
+}
+
+// tweak: { "category" : "Page Title & Description", "title" : "Description Bold Color", "type" : "color", "target" : ".title-desc-wrapper .page-desc p > strong", "showOnlyWhenPresent" : ".extra-description-formatting .page-desc p > strong" }
+@descBoldColor: #171717;
+
+// tweak:{ "category" : "Page Title & Description", "title" : "Description Button Font", "type" : "font", "loadAllVariants" : "false", "showOnlyWhenPresent" : ".extra-description-formatting .page-desc p:last-child > a", "target" : ".title-desc-wrapper .page-desc p:last-child > a" }
+.desc-button-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: none;
+  font-style: normal;
+  letter-spacing: 1px;
+  line-height: 1.6em;
+}
+
+// tweak: { "category" : "Page Title & Description", "title" : "Description Button Color", "type" : "color", "target" : ".title-desc-wrapper .page-desc p:last-child > a", "showOnlyWhenPresent" : ".extra-description-formatting .page-desc p:last-child > a" }
+@descButtonColor: #171717;
+
+// tweak: { "category" : "Page Title & Description", "title" : "Description Button Text Color", "type" : "color", "target" : ".title-desc-wrapper .page-desc p:last-child > a", "showOnlyWhenPresent" : "body:not(.description-button-style-outline).extra-description-formatting .page-desc p:last-child > a" }
+@descButtonTextColor: #fff;
+
+// tweak: { "category" : "Page Title & Description", "title" : "Description Button Style", "type": "dropdown", "options" : ["Solid", "Outline", "Raised"], "default" : "Solid", "showOnlyWhenPresent" : ".extra-description-formatting .page-desc p:last-child > a", "target" : ".title-desc-wrapper .page-desc p:last-child > a" }
+
+// tweak: { "category" : "Page Title & Description", "title" : "Description Button Corner Style", "type" : "dropdown", "options" : ["Square", "Rounded", "Pill"], "default": "Square", "showOnlyWhenPresent" : ".extra-description-formatting .page-desc p:last-child > a", "target" : ".title-desc-wrapper .page-desc p:last-child > a"  }
+
+
+
+/* MAIN CONTENT
+---------------------------------------------------*/
+
+// tweak: { "category" : "Main Content", "title" : "Content Background Color", "type" : "color", "js": "true", "target" : ".content-inner" }
+@contentBgColor: #ffffff;
+
+// tweak: { "category" : "Main Content", "title" : "Heading 1 Font", "type" : "font", "target" : ".sqs-layout .sqs-block h1, h1.entry-title, .menu-section-title" }
+.h1-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 2em;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 2px;
+  text-decoration: none;
+  line-height: 1.2em;
+}
+
+// tweak: { "category" : "Main Content", "title" : "Heading 2 Font", "type" : "font", "target" : ".sqs-block h2" }
+.h2-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1.4em;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 1px;
+  text-decoration: none;
+  line-height: 1.2em;
+}
+
+// tweak: { "category" : "Main Content", "title" : "Heading 3 Font", "type" : "font", "target" : ".sqs-block h3, .menu-item-title" }
+.h3-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 1px;
+  text-decoration: none;
+  line-height: 1.2em;
+}
+
+// tweak: { "category" : "Main Content", "title" : "Headings Color", "type" : "color", "target" : ".sqs-block h1, .sqs-block h2, .sqs-block h3, h1.entry-title, .menu-section-title, .menu-item-title" }
+@headingsColor: #16161D;
+
+// tweak: { "category" : "Main Content", "title" : "Text Font", "type" : "font", "loadAllVariants" : "true", "target": ".sqs-block" }
+.text-font {
+  font-family: "PT Serif", Georgia, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 1.6em;
+}
+
+// tweak: { "category" : "Main Content", "title" : "Text Color", "type" : "color", "target" : ".sqs-block" }
+@textColor: #363636;
+
+// tweak: { "category" : "Main Content", "title" : "Link Color", "type" : "color", "target" : ".sqs-layout" }
+@bodyLinkColor: #000000;
+
+// tweak: { "category" : "Main Content", "title" : "Underline Body Links", "type" : "checkbox", "active" : "false", "target" : ".sqs-block" }
+
+// tweak: { "category" : "Main Content", "title" : "Blog Layout", "type" : "dropdown", "options" : [ "Columns", "Simple" ], "default" : "Columns", "target" : ".hentry", "showOnlyWhenPresent" : ".collection-type-blog" }
+
+// tweak: { "category" : "Main Content", "title" : "Blog Width", "type" : "dropdown", "options" : [ "Full", "Narrow" ], "default" : "Full", "target" : ".hentry", "showOnlyWhenPresent" : ".collection-type-blog.blog-layout-simple" }
+
+// tweak: { "category" : "Main Content", "title" : "Hide Author", "type" : "checkbox", "active" : "false", "target" : ".author-name", "showOnlyWhenPresent" : ".collection-type-blog" }
+
+// tweak: { "category" : "Main Content", "title" : "Meta Info Font", "type" : "font", "loadAllVariants" : "true", "target" : ".entry-header, .entry-footer", "showOnlyWhenPresent" : ".entry-header, .entry-footer" }
+.meta-font {
+  font-family: "PT Serif", Georgia, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.95em;
+  letter-spacing: 0px;
+  line-height: 1.6em;
+}
+
+// tweak: { "category" : "Main Content", "title" : "Meta Info Color", "type" : "color", "target" : ".entry-header, .entry-footer", "showOnlyWhenPresent" : ".entry-header, .entry-footer" }
+@metaColor: #999;
+
+// tweak: { "category" : "Main Content", "title" : "Quote Block Font", "type" : "font", "target" : ".quote-block blockquote" }
+.quote-font { 
+  font-family: "PT Serif", Georgia, serif;
+  font-size: 1.4em;
+  line-height: 1.6em;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0px;
+  text-decoration: none;
+  text-align: left;
+}
+
+
+
+/* SUMMARY BLOCK STYLES
+---------------------------------------------------*/
+
+// tweak: { "category" : "Summary Block", "title" : "Summary Block Title Font", "type" : "font", "target" : ".summary-header-text, .summary-title", "showOnlyWhenPresent" : ".summary-title, .summary-title-link" }
+.summary-heading-font {
+  font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+// tweak: { "category" : "Summary Block", "title" : "Summary Block Title Color", "type" : "color", "target" : ".summary-header-text, .summary-title", "showOnlyWhenPresent" : ".summary-title, .summary-title-link" }
+@summaryHeadingColor: #666;
+
+
+
+/* FOOTER
+---------------------------------------------------*/
+
+// tweak: { "category" : "Footer", "title" : "Hide Back to Top Link", "type" : "checkbox", "active" : "false", "target" : ".back-to-top-link", "showOnlyWhenPresent" : ".collection-type-index" }
+
+// tweak:{ "category" : "Footer", "title" : "Footer Background Color", "type" : "color", "js" : "true", "target" : "#footer" }
+@footerBgColor: #171717;
+
+// tweak: { "category" : "Footer", "title" : "Secondary Navigation Font", "type" : "font", "target" : ".secondary-nav ul li" }
+.secondary-nav-font {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 0.85em;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+
+// tweak: { "category" : "Footer", "title" : "Secondary Nav Link Color", "type" : "color", "target" : ".secondary-nav ul li" }
+@secondaryNavColor: #1a1a1a;
+
+// tweak: { "category" : "Footer", "title" : "Secondary Nav Active Color", "type" : "color", "target" : ".secondary-nav ul li" }
+@secondaryNavActiveColor: #c2c2c2;
+
+
+
+/* PRODUCTS
+---------------------------------------------------*/
+
+// tweak: { "type" : "checkbox", "title" : "Show Category Navigation", "active" : "false", "target" : ".collection-type-products .main-content-wrapper", "showOnlyWhenPresent" : ".collection-type-products", "category" : "Products" }
+
+
+

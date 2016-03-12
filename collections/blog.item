@@ -1,0 +1,45 @@
+  <section class="blog-item">
+
+  {.section item}
+    <article class="entry {@|item-classes} clear" id="article-{id}" data-item-id="{id}">
+
+<!--       <div class="entry-title-wrapper">
+        <h1 data-content-field="title" class="entry-title">{title}</h1>
+      </div> -->
+
+      <div class="entry-content">
+
+        {.section body}
+          {@}
+        {.end}
+
+        <p class="entry-actions">
+          {.comments?}
+          <a class="entry-comments" href="{fullUrl}#comments-outer-wrapper" title="Comments">
+          {.if websiteSettings.disqusShortname}
+            {@|comment-link}
+          {.or}
+          {.section publicCommentCount}
+            {@} Comment{@|pluralize}
+            {.or}
+              Comment
+            {.end}
+          {.end}
+          </a>
+        {.end}
+        {@|like-button}{@|social-button-inline}
+        </p>
+
+        {.if postItemInjectCode}
+        <div class="entry-injection">
+          {postItemInjectCode}</div>
+        {.end}
+
+      </div>
+      
+    </article>
+
+    {.comments?}<div id="comments-outer-wrapper">{@|comments}</div>{.end}
+  {.end}
+
+</section>

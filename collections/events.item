@@ -1,0 +1,78 @@
+<!-- Event Item -->
+
+{.section item}
+<article class="eventitem">
+
+
+	<!-- Basic Info -->
+
+	<div class="eventitem-column-meta">
+
+		<!-- Location -->
+		{.section location}
+		<ul class="event-meta">
+			{.if addressTitle}<li class="event-meta-address event-meta-item">{addressTitle} <a href="http://maps.google.com?q={addressLine1} {addressLine2} {addressCountry}" target="_blank">(map)</a></li>{.end}
+			{.if addressLine1}<li class="event-meta-address event-meta-item">{addressLine1}</li>{.end}
+			{.if addressLine2}<li class="event-meta-address event-meta-item">{addressLine2}</li>{.end}
+			{.if addressCountry}<li class="event-meta-address event-meta-item">{addressCountry}</li>{.end}
+		</ul>
+		{.end}
+
+		<!-- Add to Google Calendar / Add to iCal -->
+		<ul class="event-meta eventitem-addtocallinks">
+			<li class="eventitem-addtocallink event-meta-item"><a href="{@|google-calendar-url}">&#10010; gCal</a></li>
+			<li class="eventitem-addtocallink event-meta-item"><a href="{fullUrl}?format=ical">&#10010; iCal</a></li>
+		</ul>
+
+	</div>
+
+
+	<!-- Description -->
+
+	<div class="eventitem-column-content">
+		{.section body} {@} {.end}
+
+		<p class="entry-actions">
+	    	{@|like-button}{@|social-button-inline}
+		</p>
+	</div>
+
+	<div class="clear"></div>
+
+</article>
+
+{.end}
+
+
+<div class="clear"></div>
+
+
+<script>
+
+	Y.use('node', function(Y) {
+
+		Y.on('domready', function() {
+
+			// If we're visiting the item details page from the calendar view,
+			// the "Back to All Events" link should go back to the calendar (and the month of the current item we're viewing)
+
+			var eventCollectionItemQS = Y.QueryString.parse(location.search.substring(1));
+			var eventCollectionItemBackLink = Y.one('.eventitem-backlink');
+			var eventCollectionItemPrevItemLink = Y.one('.eventitem-pager-newer');
+			var eventCollectionItemNextItemLink = Y.one('.eventitem-pager-older');
+			var eventCollectionItemAdditionalStrVars = '?view=calendar&month={.section item}{startDate|date %B}-{startDate|date %Y}{.end}';
+
+			if(eventCollectionItemQS.view === 'calendar') {
+
+				eventCollectionItemBackLink.setAttribute('href', eventCollectionItemBackLink.getAttribute('href') + eventCollectionItemAdditionalStrVars);
+				eventCollectionItemPrevItemLink.setAttribute('href', eventCollectionItemPrevItemLink.getAttribute('href') + eventCollectionItemAdditionalStrVars);
+				eventCollectionItemNextItemLink.setAttribute('href', eventCollectionItemNextItemLink.getAttribute('href') + eventCollectionItemAdditionalStrVars);
+
+			}  
+
+		});
+
+	});
+
+
+</script>

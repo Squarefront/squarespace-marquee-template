@@ -1,0 +1,96 @@
+<section class="blog-list">
+
+  {.if authorFilter}
+    <p class="filter"><em>Viewing entries by</em><br><strong>{author.displayName}</strong></p>
+  {.end}  
+
+  {.section categoryFilter}
+    <p class="filter"><em>Viewing entries in</em><br><strong>{@|safe}</strong></p>
+  {.end}
+
+  {.section tagFilter}
+    <p class="filter"><em>Viewing entries tagged</em><br><strong>{@|safe}</strong></p>
+  {.end}
+
+  {.repeated section items}  
+  <article class="entry cf {@|item-classes}" id="article-{id}" data-item-id="{id}">
+
+  {.main-image?}
+    <div class="main-image-wrapper">
+      <a href="{fullUrl}"><div class="main-image content-fill"><img {@|image-meta} /></div></a>
+    </div>
+  {.end}
+
+    <header class="entry-header cf">
+
+      <p class="entry-actions">
+        {.comments?}
+          <a class="entry-comments" href="{fullUrl}#comments-outer-wrapper" title="Comments">
+          {.if websiteSettings.disqusShortname}
+            {@|comment-link}
+          {.or}
+          {.section publicCommentCount}
+            {@} Comment{@|pluralize}
+            {.or}
+              Comment
+            {.end}
+          {.end}
+          </a>
+        {.end}
+        {@|like-button}{@|social-button-inline}
+      </p>
+
+      <p class="entry-more-link"><a href="{fullUrl}"></a></p>
+
+    </header>
+    <div class="entry-title-wrapper">
+      <h1 data-content-field="title" class="entry-title">
+      {.passthrough?}
+        <a href="{sourceUrl}" class="entry-title-passthrough" target="_blank">{title}</a>
+      {.or}
+        <a href="{fullUrl}">{title}</a>
+      {.end}
+      </h1>
+      <p class="date">
+        <time class="published" datetime="{addedOn|date %F}">{addedOn|date %B %e, %Y}</time>
+      </p>
+    </div>
+    
+    <div class="entry-content">
+
+      {.excerpt?}
+        {excerpt}
+      {.or}
+        {.section body}
+          {@}
+        {.end}
+      {.end}
+      <p class="entry-actions-simple">
+        {.comments?}
+          <a class="entry-comments" href="{fullUrl}#comments-outer-wrapper" title="Comments">
+          {.if websiteSettings.disqusShortname}
+            {@|comment-link}
+          {.or}
+          {.section publicCommentCount}
+            {@} Comment{@|pluralize}
+            {.or}
+              Comment
+            {.end}
+          {.end}
+          </a>
+        {.end}
+        {@|like-button}{@|social-button-inline}
+      </p>
+
+      {.if postItemInjectCode}
+      <div class="entry-injection">
+        {postItemInjectCode}
+      </div>
+      {.end}
+      
+    </div>
+  
+  </article>
+  {.end}
+  
+</section>

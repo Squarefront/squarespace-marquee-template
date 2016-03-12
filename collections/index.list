@@ -1,0 +1,58 @@
+{.section collection}
+
+  {.if collections.1}
+  <nav id="parallax-nav">
+    <ul>
+    {.repeated section collections}
+      <li id="parallax-nav-item-{urlId}"><a href="#{urlId}"><span class="nav-title">{title}</span></a></li>
+    {.end}
+    </ul>
+  </nav>
+  {.or}
+    <!-- <div class="sqs-state-message error">There are no pages in this Index.</div> -->
+  {.end}
+
+  <div id="parallax-images">
+    {.repeated section collections}
+    <div class="image-container content-fill" data-url-id="{urlId}" data-content-field="main-image">
+      {.section mainImage}
+      <img {@|image-meta} class="loading" data-load="false" />
+      <div class="image-overlay-wrapper"></div>
+      {.end}
+    </div>
+    {.end}
+  </div>
+
+  {.repeated section collections}
+  <div class="parallax-item" data-url-id="{urlId}">
+    <div class="title-desc-wrapper over-image{.section mainImage} has-main-image{.or} no-main-image{.end}" {.section mainImage}data-color-suggested="#{colorData.suggestedBgColor}"{.end}>
+
+      {.section mainImage}
+      <div class="title-desc-image content-fill" data-content-field="main-image">
+        <img {@|image-meta} data-load="false"/>
+        <div class="image-overlay-wrapper"></div>
+      </div>
+      {.end}
+
+      <div class="title-desc-inner" data-collection-id="{id}" data-edit-main-image="Background">
+        <div class="page-title-wrapper"><h1 class="page-title" data-content-field="title">{title}</h1></div>
+        <br> <!-- this keeps the inline-blocks from collapsing -->
+        <div class="page-desc" data-content-field="description">{.section description}{@}{.end}</div>
+      </div>
+    <div class="scroll-arrow"><span>SCROLL DOWN</span></div>
+    </div>
+    <div class="content{.section mainImage} has-main-image{.end}">
+    	<div class="content-inner{.section mainContent} has-content{.end}" data-content-field="main-content">
+        <div class="title-desc-wrapper">
+          <div class="title-desc-inner" data-collection-id="{id}">
+            <div class="page-title-wrapper"><h1 class="page-title">{title}</h1></div>
+            <br> <!-- this keeps the inline-blocks from collapsing -->
+            <div class="page-desc" data-content-field="description">{.section description}{@}{.end}</div>
+          </div>
+        </div>
+	      {mainContent}
+	     </div>
+    </div>
+  </div>
+  {.end}
+{.end}

@@ -1,0 +1,936 @@
+/*=================================================
+
+	Event Collections
+
+=================================================*/
+
+
+@import 'sqs-ui-font';
+
+// tweak:{ type:'checkbox', title:'Event Time Format', active: false, target:'.eventlist, .eventitem', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// OFFtweak:{ type:'checkbox', title:'Event Icons', active: false, target:'.eventlist, .eventitem', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// OFFtweak:{ type:'checkbox', title:'Event Thumbnails', active: true, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// OFFtweak:{ type:'dropdown', title:'Event Thumbnail Size', options:[ '1:1 Square', '3:2 Standard', '2:3 Standard (Vertical)', '4:3 Four Thirds', '16:9 Widescreen', '2.40:1 Anamorphic Widescreen' ], default: '3:2 Standard', target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// OFFtweak:{ type:'checkbox', title:'Event Date Label', active: true, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// OFFtweak:{ type:'checkbox', title:'Event Date Label Time', active: true, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// tweak:{ type:'checkbox', title:'Event Excerpts', active: true, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// tweak:{ type:'checkbox', title:'Event List Date', active: true, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// tweak:{ type:'checkbox', title:'Event List Time', active: true, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// tweak:{ type:'checkbox', title:'Event List Address', active: true, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// tweak:{ type:'checkbox', title:'Event iCal/gCal Links', active: true, target:'.eventitem', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// OFFtweak:{ type:'checkbox', title:'Event Like and Share Buttons', active: false, target:'.eventitem', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// OFFtweak:{ type:'checkbox', title:'Event List Compact View', active: false, target:'.eventlist', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// tweak:{ type:'checkbox', title:'Event Calendar Compact View', active: false, target:'.eventcal', category: 'Event Styles', showOnlyWhenPresent: '.collection-type-events' }
+// tweak: { "category" : "Event Styles", "title" : "Events Layout", "type" : "dropdown", "options" : [ "Columns", "Simple" ], "default" : "Columns", "target" : ".eventlist-event", "showOnlyWhenPresent" : ".collection-type-events" }
+// tweak: { "category" : "Event Styles", "title" : "Events Width", "type" : "dropdown", "options" : [ "Full", "Narrow" ], "default" : "Full", "target" : ".eventlist-event", "showOnlyWhenPresent" : ".collection-type-events.events-layout-simple" }
+
+@eventCollectionDateColumnWidth: 10em;
+@eventCollectionSpacing: 1em;
+
+
+
+/* 	General Styling
+=================================================*/
+
+.event-time-24hr {
+	display:none;
+}
+
+.event-icon-date,
+.event-icon-time,
+.event-icon-address,
+.event-icon-tags,
+.event-icon-cats {
+	display:none;
+	font-size:1.4em;
+	line-height:0.6em;
+	margin-right:8px;  
+}
+
+.event-icon-date {
+	.sqs-ui-font(calendar, before);
+}
+
+.event-icon-time {
+	.sqs-ui-font(clock, before);
+}
+
+.event-icon-address {
+	.sqs-ui-font(map-marker, before);
+}
+
+.event-icon-tags {
+	.sqs-ui-font(tag, before);	
+}
+
+.event-icon-cats {
+	.sqs-ui-font(folder, before);	
+}
+
+.event-meta {
+	padding: 0;
+}
+
+.page-title-style-small-center .event-meta {
+	list-style-type:none;
+	margin:0 0 1em 0;
+	text-align: center;
+}
+
+	.event-meta-heading,
+	.event-meta-address:nth-of-type(1) {
+		font-weight:bold;
+	}
+
+	.event-meta-item {
+		margin-left:0; /* Adjusts for common list item left margins */
+	}
+
+
+
+
+
+/* 	List View
+=================================================*/
+
+.eventlist-filter {
+	font-size:1.1em;
+	margin:0 0 80px 0;
+}
+
+.eventlist-event {
+	position:relative;
+	margin:0 0 120px 0;
+	padding:0;
+}
+
+	.eventlist-column-thumbnail {
+		display: none;
+	}
+
+	.eventlist-column-date {
+		position:absolute;
+		top:0;
+		left:0;
+		/*width:@eventCollectionDateColumnWidth;*/  /* See Event Date Label Tweak */
+		min-height:10px;
+	}
+
+		.eventlist-datelabel {
+			display:none;
+			font-size:1.4em;
+			line-height:1em;
+			font-weight:200;
+		}
+
+		.eventlist-datelabel-enddate,
+		.eventlist-datelabel-time {
+		    display: block;
+		    font-size: 0.8em;
+		    margin: (@eventCollectionSpacing/3.5) 0 0 0;
+		}
+
+		.eventlist-datelabel-time {
+			display:none;
+			text-transform: uppercase;
+		}
+
+	.eventlist-column-info {
+		width:100%;
+		/*padding:0 0 0 (@eventCollectionDateColumnWidth + 1);*/ /* Applied in Event Date Label Tweak */
+		.box-sizing;
+	}
+
+		.eventlist-title {
+			font-size:1.4em;
+			line-height:1em;
+			margin:0 0 @eventCollectionSpacing 0;
+		}
+
+			.eventlist-title-link {
+				line-height:1em;
+				font-size:inherit !important;
+				line-height:inherit !important;
+			}
+
+		.eventlist-description,
+		.eventlist-excerpt {
+			display:none;
+			margin:0 0 @eventCollectionSpacing 0;
+		}
+
+		.eventlist-meta {
+			margin:0;
+		}
+
+			.eventlist-meta-date,
+			.eventlist-meta-time,
+			.eventlist-meta-address {
+				display:none;
+			}
+
+
+
+/* 	Item View
+=================================================*/
+
+
+.eventitem-backlink {
+	display:inline-block;
+	margin:0 0 (@eventCollectionSpacing * 3) 0;
+	text-transform: uppercase;
+}
+
+.eventitem {
+	position:relative;
+	padding:0 0 (@eventCollectionSpacing * 6) 0;
+}
+
+.eventitem-title {
+	margin:0 0 (@eventCollectionSpacing * 1.5) 0;
+	line-height:1.3em;
+}
+
+.eventitem-column-content,
+.eventitem-column-meta {
+	// float:left;
+	.box-sizing;
+}
+
+.eventitem-column-meta {
+	// width: 26%;
+  margin: 0 0 2em;
+}
+
+	.eventitem-socialicon {
+		display:none;
+		margin:0 12px 0 0;
+	}
+
+	.eventitem-addtocallink {
+		display:none;
+		margin-right:12px;
+	}
+
+.eventitem-column-content {
+	// width:70%;
+}
+
+.event-time {
+	// .page-description-font;
+	margin: 1em 0 0;
+}
+
+
+
+/*----- Pagination -----*/  
+
+.eventitem-pager {
+	margin:(@eventCollectionSpacing * 4) 0 0 0;
+}
+
+	.eventitem-pager-newer,
+	.eventitem-pager-older {
+		float:left;
+		display: inline-block;
+		text-decoration: none;
+		.box-sizing;
+	}
+
+	.eventitem-pager-newer {
+		float: right;
+		text-align: right;
+	}
+
+		.eventitem-pager-newer .eventitem-pager-icon {
+			.sqs-ui-font(right-arrow, before);          
+			.sqs-ui-font-size(16px, inherit);
+			margin-left: .5em;
+		}
+
+		.eventitem-pager-older .eventitem-pager-icon {
+			.sqs-ui-font(left-arrow, before);
+			.sqs-ui-font-size(16px, inherit);
+			margin-right: .5em;
+		}
+
+		.eventitem-pager-disabled {
+			opacity:0.4;
+		}
+
+
+
+/* 	Calendar (Grid)
+=================================================*/
+
+.yui3-eventcollectioncalendar {
+
+	&.yui3-calendar {
+		position:relative;
+		outline:none;
+	}
+
+	.sqs-spin {
+		position:absolute;
+		left:50%;
+		top:100px;
+	}
+
+	.yui3-calendar-header {
+		margin: 0 0 3em 0;
+		padding:0;
+	    overflow:hidden;
+	}
+
+		.yui3-calendar-header-label {
+		    float: left;
+		    width:60%;
+		    font-size: 22px;
+		    line-height: 26px; /* same height as prev/next buttons */
+		    text-align: left;
+		}
+
+		.yui3-calendarnav-prevmonth,
+		.yui3-calendarnav-nextmonth {
+			opacity:0;
+		    float:right;
+		    height:26px;
+		    width:26px;
+		    line-height:26px;
+		    margin:0 0 0 1px;
+			background-color: #1d1d1d;
+			font-weight:normal;
+			text-align:center;
+			color:transparent;
+		}	
+
+			.yui3-calendarnav-prevmonth:before,
+			.yui3-calendarnav-nextmonth:before {
+				color:white;
+			}																
+
+			.yui3-calendarnav-prevmonth {
+				.sqs-ui-font(left-arrow, before);
+				.sqs-ui-font-size(16px, inherit);
+			}
+
+			.yui3-calendarnav-nextmonth {
+				.sqs-ui-font(right-arrow, before);
+				.sqs-ui-font-size(16px, inherit);
+			}
+
+	.yui3-calendar-grid {
+		opacity:0;
+		border-collapse: separate;
+		border-spacing: 0;
+
+		-webkit-transition: opacity 0.3s ease-in;
+		-moz-transition: opacity 0.3s ease-in;
+		-o-transition: opacity 0.3s ease-in;
+		transition: opacity 0.3s ease-in;
+	}
+
+	.eventcal-show {
+		opacity:1;
+	}
+
+	.yui3-calendar-weekdayrow {
+		display:none;
+		font-size:0.8em;
+		text-align:center;
+		text-transform: uppercase;
+	}
+
+	.yui3-calendar-day,
+	.yui3-calendar-prevmonth-day,
+	.yui3-calendar-nextmonth-day {
+		position:relative;
+		height:0;
+		width:14%;
+		padding:0;
+		background:#fff;
+		color:#000;
+		outline:none;
+		cursor:default;
+
+		box-shadow:0 0 0 1px #ddd; /* 1px "shadow" == cross-browser table cell border compatibility. */
+		-moz-box-shadow:0 0 0 1px #ddd;
+		-webkit-box-shadow:0 0 0 1px #ddd;
+	}
+
+	.yui3-calendar-prevmonth-day,
+	.yui3-calendar-nextmonth-day {
+		background:#f6f6f6;
+	}
+
+	.yui3-calendar-nextmonth-day {
+		line-height: 0;
+		padding: 0;
+	}
+
+}
+
+.eventcal-clone {
+	display:none;
+}
+
+.eventcal-content-wrapper {
+	position:relative;
+	height:0;
+	width:100%;
+	padding-bottom:100%;
+}
+
+.eventcal-daymarker {
+	position:absolute;
+	top:5px;
+	right:10px;
+	font-size:0.9em;
+}
+
+.eventcal-daymarker-outside {
+	display:none;
+}
+
+.eventcal-list {
+	position:absolute;
+	top:0;
+	left:-1px;
+	width:100%;
+	max-height:100%;
+	list-style-type:none;
+	padding:30px 10px 0 11px;
+	margin:0 !important;
+	overflow:hidden;
+	.box-sizing;
+}
+	
+	.eventcal-dayname,
+	.eventcal-daynumber {
+		display:inline-block;
+		margin-left:3px;
+	}
+
+	.eventcal-dayname {
+		opacity:0.5;
+	}
+
+	.eventcal-item {
+		margin:5px 0 0 0;
+		padding:0;
+		font-size:11px;
+		line-height:13px;
+	}
+
+		.eventcal-link {
+			display:inline-block;
+			font-size:11px;
+			line-height:13px;
+			color:#000 !important;
+			font-weight:normal;
+		}
+
+			.eventcal-time-12hr,
+			.eventcal-time-24hr {
+				font-weight:bold;
+				margin-right:4px;
+			}
+
+			.eventcal-time-24hr {
+				display:none;
+			}
+
+		.eventcal-multiday,
+		.eventcal-multiday-subsequent {
+
+			.eventcal-title {
+				font-weight:bold;
+				/*margin-right:4px;*/
+			}
+
+			.eventcal-time-12hr,
+			.eventcal-time-24hr {
+				display:none;
+			}
+		}
+
+		.eventcal-multiday-subsequent {
+			&.eventcal-link {
+				opacity:0.5;
+			}
+
+			.eventcal-title {
+				font-weight:normal;
+			}
+		}
+
+	.eventcal .eventcal-today {
+		background:#1d1d1d;
+		color:#fff !important;
+
+		.eventcal-link {
+			color:#fff !important;
+		}
+
+		.eventcal-viewall,
+		.eventcal-list-overflow-show {
+			background:#1d1d1d;
+			color:#fff !important;
+		}
+
+	}
+
+.eventcal-item-hidden {
+	visibility:hidden;
+}
+
+.eventcal-viewall {
+	visibility:hidden;
+	position:absolute;
+	right:0;
+	bottom:0;
+	width:100%;
+	background:#fff;
+	color:#1d1d1d;
+	padding:0;
+	font-size:1.2em;
+	line-height:normal;
+	font-weight:bold;
+	text-align:center;
+}
+
+.eventcal-viewall-show {
+	visibility:visible;
+}
+
+.eventcal-node-has-event:hover .eventcal-viewall-show {
+	visibility:hidden;
+}
+
+.eventcal-list-overflow-show {
+	max-height:400px;
+	padding-top:30px;
+	padding-bottom:10px;
+	background:#fff;
+	z-index:100;
+
+	box-shadow: inset 1px 0px 0px 0px #ddd, 1px 0px 0px 0 #ddd, 0px 1px 0px 0px #ddd;
+	-moz-box-shadow: inset 1px 0px 0px 0px #ddd, 1px 0px 0px 0 #ddd, 0px 1px 0px 0px #ddd;
+	-webkit-box-shadow: inset 1px 0px 0px 0px #ddd, 1px 0px 0px 0 #ddd, 0px 1px 0px 0px #ddd;
+
+	-webkit-transition: max-height 0.3s ease-in;
+	-moz-transition: max-height 0.3s ease-in;
+	-o-transition: max-height 0.3s ease-in;
+	transition: max-height 0.3s ease-in;
+
+	.eventcal-item-hidden {
+		visibility:visible;
+	}
+
+	&.eventcal-list-overflow-fixedwidth {
+		top:-4px;
+		width:120px;
+		padding-right:10px;
+		padding-left:10px;
+		background:#fff !important; /* overriding .eventcal-today styling */
+		color:#000 !important;
+		border-top:3px solid #ddd;
+
+		-webkit-transition: none;
+		-moz-transition: none;
+		-o-transition: none;
+		transition: none;
+
+		&.eventcal-edge-left {
+			left:-1px !important;
+		}
+
+		&.eventcal-edge-right {
+			right:0px !important;
+			left:auto !important;
+		}
+
+		.eventcal-link,
+		.eventcal-dayname,
+		.eventcal-daynumber {
+			color:#000 !important; /* overriding .eventcal-today styling */
+		}
+
+	}
+}
+
+/* Bonus Stuff */
+.eventcal-eventcount,
+.eventcal-hiddencount-num {
+	display:none;
+}
+
+
+
+/* 	Tweaks
+=================================================*/
+
+.event-thumbnails {
+
+	.eventlist-column-date,
+	.eventlist-column-thumbnail {
+		position:relative;
+		float:left;
+		width:30%;
+		text-align:right;
+	}
+
+	.eventlist-column-info {
+		float: left;
+		width:70%;
+		padding:0 0 0 30px;
+	}
+
+	.eventlist-hasimg {
+
+		/* Date will be absolutely positioned over the thumbnail as a little white tag */
+
+		.eventlist-column-thumbnail {
+			display: block;
+			height: 0;
+			padding-bottom:20%; /* Just a fallback. See full thumbnail aspect ratio settings below */
+		}
+
+		.eventlist-column-date {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 100;
+		}
+
+			.eventlist-datelabel {
+				margin-top:5px;
+				padding:8px 12px;
+				background-color: rgb(255, 255, 255); 
+				background-color: rgba(255, 255, 255, 0.9);
+				color:#000;
+			}
+
+		.eventlist-title {
+			padding-top:13px;
+		}
+	}
+
+	// thumbnail aspect ratio settings (multiplied by 0.40)
+	&.event-thumbnail-size-11-square .eventlist-hasimg .eventlist-column-thumbnail						{ padding-bottom: 30%; }
+	&.event-thumbnail-size-32-standard .eventlist-hasimg .eventlist-column-thumbnail					{ padding-bottom: 20%; }
+	&.event-thumbnail-size-23-standard-vertical .eventlist-hasimg .eventlist-column-thumbnail 			{ padding-bottom: 45%; }
+	&.event-thumbnail-size-43-four-thirds .eventlist-hasimg .eventlist-column-thumbnail 				{ padding-bottom: 22.5%; }
+	&.event-thumbnail-size-169-widescreen .eventlist-hasimg .eventlist-column-thumbnail 				{ padding-bottom: 16.875%; }
+	&.event-thumbnail-size-2401-anamorphic-widescreen .eventlist-hasimg .eventlist-column-thumbnail 	{ padding-bottom: 12%; }
+
+}
+
+.event-time-format {
+	.event-time-12hr,
+	.eventcal-time-12hr {
+		display:none;
+	}
+
+	.event-time-24hr{
+		display:block;
+	}
+
+	.eventcal-time-24hr {
+		display:inline-block;
+	}
+}
+
+.event-date-label {
+
+	.eventlist-datelabel {
+		display:inline-block;
+	}
+
+	.eventlist-column-date {
+		width: @eventCollectionDateColumnWidth;
+	}
+
+	.eventlist-column-info {
+		padding: 0 0 0 (@eventCollectionDateColumnWidth + 1);
+	}
+
+	&.event-thumbnails {
+		.eventlist-column-date {
+			width:30%;
+		}
+		.eventlist-column-info {
+			padding:0 0 0 30px;
+		}
+	}
+
+}
+
+.event-date-label-time {
+	.eventlist-datelabel-time {
+		display:block;
+	}
+}
+
+.event-excerpts {
+	.eventlist-description,
+	.eventlist-excerpt {
+		display:block;
+	}
+}
+
+.event-list-date {
+	.eventlist-meta-date {
+		display:block;
+	}
+}
+
+.event-list-time {
+	.eventlist-meta-time {
+		display:block;
+	}
+}
+
+.event-list-address {
+	.eventlist-meta-address {
+		display:block;
+	}
+}
+
+.event-like-and-share-buttons {
+	.eventitem-socialicon {
+		display:inline;
+	}
+}
+
+.event-icalgcal-links {
+	.eventitem-addtocallink {
+		display:inline-block;
+	}
+}
+
+.event-icons {
+	.event-icon-date,
+	.event-icon-time,
+	.event-icon-address,
+	.event-icon-tags,
+	.event-icon-cats {
+		display:inline-block;
+	}
+
+	.eventitem-cats-heading,
+	.eventitem-tags-heading {
+		display:none;
+	}
+}
+
+
+
+/* 	Mobile / Compact View Tweaks */
+/*	You can add these mixins to the 
+	body tag to switch to the small format 
+	(e.g. if your containing element is small 
+	by default) 
+=================================================*/
+
+/*----- List View -----*/
+
+.event-list-compact-view {
+
+	.eventlist-column-date {
+		display:none;
+	}
+
+	.eventlist-column-info {
+		padding-left:0 !important;
+	}
+
+
+
+	/* If showing thumbnails, move event thumbnail above event and style the text content below in the default fashion */
+
+	&.event-thumbnails {
+
+		.eventlist-column-info {
+			width:100%;
+			padding:0;
+		}
+
+		.eventlist-hasimg {
+
+			.eventlist-column-thumbnail {
+				position:absolute;
+				top:0;
+				left:0;
+				width:100%;
+				padding-bottom:40%;
+			}
+
+			.eventlist-column-info {
+				padding-top:40%;
+				margin-top:@eventCollectionSpacing;
+			}
+		}
+
+		// thumbnail aspect ratio settings (multiplied by 0.30)
+		&.event-thumbnail-size-11-square .eventlist-hasimg {
+			.eventlist-column-thumbnail { padding-bottom: 100%; }
+			.eventlist-column-info { padding-top:100%; }
+		}
+
+		&.event-thumbnail-size-32-standard .eventlist-hasimg {
+			.eventlist-column-thumbnail	{ padding-bottom: 66%; }
+			.eventlist-column-info { padding-top:66%; }
+		}
+
+		&.event-thumbnail-size-23-standard-vertical .eventlist-hasimg {
+			.eventlist-column-thumbnail	{ padding-bottom: 150%; }
+			.eventlist-column-info { padding-top:150%; }
+		}
+
+		&.event-thumbnail-size-43-four-thirds .eventlist-hasimg {
+			.eventlist-column-thumbnail { padding-bottom: 75%; }
+			.eventlist-column-info { padding-top:75%; }
+		}
+
+		&.event-thumbnail-size-169-widescreen .eventlist-hasimg {
+			.eventlist-column-thumbnail { padding-bottom: 56.25%; }
+			.eventlist-column-info { padding-top:56.25%; }
+		}
+
+		&.event-thumbnail-size-2401-anamorphic-widescreen .eventlist-hasimg {
+			.eventlist-column-thumbnail { padding-bottom: 40%; }
+			.eventlist-column-info { padding-top:40%; }
+		}
+	}
+
+	/* Item View */
+	.eventitem-column-content,
+	.eventitem-column-meta {
+		float:none;
+		width:auto;
+		padding:0;
+	}
+
+	.eventitem-pager-title {
+		display:none;
+	}
+}
+
+
+/*----- Item View -----*/
+
+.event-item-compact-view {
+	
+	.eventitem-column-content,
+	.eventitem-column-meta {
+		float:none;
+		width:auto;
+		padding:0;
+	}
+
+	.eventitem-pager-title {
+		display:none;
+	}
+
+}
+
+
+/*------ Calendar View -----*/
+
+.event-calendar-compact-view {
+	.eventcal-dayname,
+	.eventcal-daymarker-inside {
+		display:none;
+	}
+
+	.yui3-eventcollectioncalendar .yui3-calendar-weekdayrow {
+		display:table-row;
+	}
+
+	.eventcal-daymarker-outside {
+		display:inline-block;
+		top:5px;
+		right:5px;
+		line-height:11px;
+	}
+
+	.eventcal-daynumber { 
+		margin:0;
+		font-size:11px;
+		line-height:11px;
+	}
+
+	.eventcal-viewall {
+		font-size:10px;
+	}
+
+	.eventcal-list-overflow-show.eventcal-list-overflow-fixedwidth {
+		top:85%;
+		padding-top:5px;
+		overflow:visible; /* for arrow */
+		background:#fff !important; /* overriding .eventcal-today styling */
+		border-color:#ddd !important; /* overriding .eventcal-today styling */
+
+		.eventcal-link {
+			color:#000 !important; /* overriding .eventcal-today styling */
+		}
+
+		.eventcal-arrow-wrapper {
+			position:absolute;
+			top:0;
+			left:0;
+			width:100%;
+			text-align: center;
+			margin-left:-7px;
+		}
+
+		.eventcal-arrow {
+			position:absolute;
+			top:-10px;
+			left:50%;
+			display:inline-block;
+			width: 0; 
+			height: 0; 
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+			border-bottom: 7px solid #ddd;
+		}
+
+		&.eventcal-edge-left {
+			.eventcal-arrow-wrapper {
+				text-align:left;
+			}
+			.eventcal-arrow {
+				margin-left:7px;
+				left:0;
+			}
+		}
+
+		&.eventcal-edge-right {
+			.eventcal-arrow-wrapper {
+				text-align:right;
+			}
+			.eventcal-arrow {
+				margin-right:-7px;
+				left:auto;
+				right:0;
+			}
+		}
+	}
+
+}
+
+@media only screen and (max-width: 639px) {
+
+	.event-list-compact-view;
+
+	.event-item-compact-view;
+
+}
+
+@media only screen and (max-width: 479px) {
+
+	.event-calendar-compact-view;
+
+}

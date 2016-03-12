@@ -1,0 +1,192 @@
+<!-- Event Calendar View -->
+
+{.calendar-view?}
+
+	<!--[if lte IE 8]>
+		<style type="text/css">
+			.yui3-eventcollectioncalendar .yui3-calendar-day {
+				border:1px solid #DDDDDD;
+			}
+		</style>
+	<![endif]-->
+
+	<div class="eventcal" id="jsEventCollectionCalendar" data-month-filter="{monthFilter}">
+
+		<div class="eventcal-clone">
+			<div class="eventcal-content-wrapper">
+				<div class="eventcal-daymarker eventcal-daymarker-outside">
+					<div class="eventcal-dayname"></div>
+					<div class="eventcal-daynumber"></div>
+				</div>
+				<ul class="eventcal-list">
+					<li class="eventcal-arrow-wrapper">
+						<span class="eventcal-arrow"></span>
+					</li>
+					<li class="eventcal-daymarker eventcal-daymarker-inside">
+						<div class="eventcal-dayname"></div>
+						<div class="eventcal-daynumber"></div>
+					</li>
+					<li class="eventcal-item eventcal-item-hidden">
+						<a href="#" class="eventcal-link">
+							<span class="eventcal-time-12hr"></span><span class="eventcal-time-24hr"></span><span class="eventcal-title"></span>
+						</a>
+					</li>
+				</ul>
+				<div class="eventcal-viewall">
+					<div class="eventcal-hiddencount">&middot; &middot; &middot;<span class="eventcal-hiddencount-num"></span></div>
+					<div class="eventcal-eventcount"></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+<!-- Event List View -->
+
+{.or}
+
+	<div class="eventlist">
+
+
+		<!-- Category / Tag Filters -->
+
+		{.section categoryFilter}
+		<p class="filter"><em>Viewing entries in</em><br><strong>{@|safe}</strong></p>
+		{.end}
+
+		{.section tagFilter}
+		<p class="filter"><em>Viewing entries tagged</em><br><strong>{@|safe}</strong></p>
+		{.end}
+
+
+		<!-- Individual Event -->
+
+		{.repeated section upcoming}
+
+		<article class="eventlist-event{.main-image?} eventlist-hasimg{.end}">
+
+			{.main-image?}
+		    <div class="main-image-wrapper">
+		      <a href="{fullUrl}"><div class="main-image content-fill"><img {@|image-meta} /></div></a>
+		    </div>
+		  {.end}
+
+		  <header class="entry-header cf">
+	      <p class="entry-actions">
+	        {@|like-button}{@|social-button-inline}
+	      </p>
+	      <p class="entry-more-link"><a href="{fullUrl}"></a></p>
+	    </header>
+
+	    <div class="entry-title-wrapper">
+				<h1 data-content-field="title" class="entry-title">
+					<a href="{fullUrl}">{title}</a>
+				</h1>
+				<p class="date">
+					<time class="event-meta-heading eventlist-meta-date">{startDate|date %A, %B %e, %Y}{.same-day?}{.or}{.if endDate} &ndash; {endDate|date %A, %B %e, %Y}{.end}{.end}</time>
+					<span class="eventlist-meta-time">
+						<time class="event-time-12hr">{startDate|date %l:%M%P}{.same-day?}{.if endDate} &ndash; {endDate|date %l:%M%P}{.end}{.end}</time>
+						<time class="event-time-24hr">{startDate|date %H:%M}{.same-day?}{.if endDate} &ndash; {endDate|date %H:%M}{.end}{.end}</time>
+					</span>
+				</p>
+
+				<!-- Location -->
+				<p class="location eventlist-meta-address">
+					{.section location}
+					{.if addressTitle}
+					<strong>{addressTitle}</strong> <a href="http://maps.google.com?q={addressLine1} {addressLine2} {addressCountry}" target="_blank">(map)</a>
+					{.end}
+					{.end}
+				</p>
+	    </div>
+
+			<!-- Information Column -->
+
+			<div class="entry-content">
+
+				<!-- Description -->					
+				{.section excerpt}
+				<div class="eventlist-excerpt">{@}</div>
+				<p><a href="{fullUrl}" class="view-event"></a></p>
+				{.or}
+					{.section body}
+					<div class="eventlist-description">{@}</div>
+					{.end}
+				{.end}
+
+			</div>
+
+			<div class="clear"></div>
+
+		</article>
+
+		{.or}
+
+		<p>No upcoming events.</p>
+
+		{.end}
+
+	</div>
+
+{.end}
+
+<script>
+
+	Y.use('node', 'node-event-simulate', function(Y) {
+
+		Y.on('domready', function() {
+
+
+			// Load the calendar if the elements are in the dom
+
+			var eventCalendarContainer = Y.one('#jsEventCollectionCalendar');
+
+			if(eventCalendarContainer) {
+				
+				Y.use('squarespace-events-calendar', function(Y) {
+
+					var eventCalendar = new Y.Squarespace.EventCollectionCalendar({
+					  contentBox: eventCalendarContainer
+					});
+
+					eventCalendar.render();
+
+				});
+			}
+
+
+			// Refire ImageLoader when necessary
+
+			var eventCollectionListThumb = Y.all('.eventlist-column-thumbnail img');
+
+			Y.on('windowresize', function(e){
+				eventCollectionListThumb.each(function(img) {
+					ImageLoader.load(img);
+				});
+			});
+			
+			Y.Global.on('tweak:change', function (f) {
+
+				if (f.getName() === 'event-thumbnail-size' || f.getName() === 'event-thumbnails' || f.getName() === 'event-list-compact-view') {
+					eventCollectionListThumb.each(function(img) {
+						ImageLoader.load(img);
+					});
+				}
+
+			});
+
+			Y.Global.on('tweak:reset', function (f) {			  
+				setTimeout(function() {
+					eventCollectionListThumb.each(function(img) {
+						ImageLoader.load(img);
+					});
+				}, 2000);
+			});
+
+		});
+
+	});
+
+
+</script>
