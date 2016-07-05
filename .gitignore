@@ -1,4 +1,8 @@
+################################################
+###############  .gitignore   ##################
+################################################
+
+
+
+.DS_Store
 sftp-config.json
-blocks/album-index.block
-presets/default.preset
-__sublime_sftp_offset
