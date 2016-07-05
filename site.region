@@ -31,7 +31,7 @@
               <h1 data-content-field="site-title" data-annotation-alignment="bottom" class="site-title">
                 <a href="/" id="top">
                 {.section logoImageUrl}
-                  <img src="{logoImageUrl}?format=400w" alt="{siteTitle}" />
+                  <img src="{logoImageUrl}?format=1500w" alt="{siteTitle}" />
                 {.or}
                   {siteTitle}
                 {.end}
@@ -148,7 +148,7 @@
             <h1 data-content-field="site-title" class="site-title" data-annotation-alignment="bottom">
               <a href="/" id="top">
                 {.section logoImageUrl}
-                 <img src="{logoImageUrl}?format=400w" alt="{siteTitle}" />
+                 <img src="{logoImageUrl}?format=1500w" alt="{siteTitle}" />
                 {.or}
                   {siteTitle}
                 {.end}
@@ -175,7 +175,7 @@
               <h1 data-content-field="site-title" class="site-title">
                 <a href="/" id="top">
                   {.section logoImageUrl}
-                   <img src="{logoImageUrl}?format=400w" alt="{siteTitle}" />
+                   <img src="{logoImageUrl}?format=1500w" alt="{siteTitle}" />
                   {.or}
                     {siteTitle}
                   {.end}
