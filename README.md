@@ -23,3 +23,4 @@ Marquee template currently powers the following Squarespace template starting po
 This template is a copy of Squarespace's own template for the purposes of tracking development updates. This template code is subject to Squarespace's [Developer Template License](https://www.squarespace.com/template-license/).
 
 ## Release Notes
+* Not much activity going on with this template. Small bug fixes.
