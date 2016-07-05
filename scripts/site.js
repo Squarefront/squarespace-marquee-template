@@ -1,5 +1,5 @@
 
-var DEBUG = true;
+var DEBUG = false;
 
 Y.use([
   'node',
@@ -132,10 +132,17 @@ Y.use([
           scrollArrow.on('click', function() {
             var nextItem = scrollArrow.ancestor('.title-desc-wrapper').next('.content');
             if (nextItem) {
+
+              var nextItemY = nextItem.getY();
+
+              if (Y.one('body.fixed-header')) {
+                nextItemY = nextItemY - Y.one('#header').get('offsetHeight');
+              }
+
               var scrollAnimation = new Y.Anim({
                 node: Y.one(Y.UA.gecko || Y.UA.ie || !!navigator.userAgent.match(/Trident.*rv.11\./) ? 'html' : 'body'),
                 to: {
-                  scrollTop : nextItem.getY()
+                  scrollTop : nextItemY
                 },
                 duration: 0.5,
                 easing: 'easeOut'
@@ -776,7 +783,7 @@ Y.use([
         });
 
         var fadeInHeaderBg = function() {
-          if (Y.config.win.scrollY > headerHeight) {
+          if (Y.config.win.pageYOffset > headerHeight) {
             Y.one('#header').setStyle('backgroundColor', headerBgColor);
           } else {
             header.setStyle('backgroundColor', 'transparent');
@@ -807,7 +814,7 @@ Y.use([
           });
         } else {
           var rafFixedCast = new rafscroll(function () {
-            cart.toggleClass('fixed-cart', Y.config.win.scrollY >= offsetY);
+            cart.toggleClass('fixed-cart', Y.config.win.pageYOffset >= offsetY);
           });
         }
       }
