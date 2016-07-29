@@ -1,4 +1,4 @@
- 
+
 @siteWidth: 960px;
 
 
@@ -448,8 +448,8 @@ hr {
       }
     }
   }
-  &.active-link .folder-child-wrapper ul.folder-child li a,
-  &.active-link .folder-child-wrapper ul.folder-child li a:visited {
+  &.active-link .folder-child-wrapper ul.folder-child li.active-link a,
+  &.active-link .folder-child-wrapper ul.folder-child li.active-link a:visited {
     color: @navActiveColor;
     &:hover {
       color: fadeout(@navActiveColor, 30%);
@@ -645,11 +645,38 @@ hr {
     left: 0;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
     background-color: @contentBgColor;
     -webkit-backface-visibility: hidden;
     img {
       opacity: 1;
       &.loading { opacity: 0; }
+    }
+  }
+}
+
+body {
+  &.parallax-scrolling {
+    #parallax-images .sqs-video-background {
+      display: block;
+    }
+
+    .parallax-item .sqs-video-background {
+      display: none;
+    }
+
+    &.mobile-parallax .parallax-item .sqs-video-background {
+      display: block;
+    }
+  }
+
+  &:not(.parallax-scrolling) {
+    #parallax-images .sqs-video-background {
+      display: none;
+    }
+
+    .parallax-item .sqs-video-background {
+      display: block;
     }
   }
 }
@@ -889,6 +916,10 @@ body:not(.title--description-position-over-image):not(.collection-type-index) .t
       color: @titleTextColor;
     }
   }
+}
+
+.title--description-position-over-image .sqs-video-background + .title-desc-wrapper:not(.has-main-image) {
+  background-color: transparent;
 }
 
 .title--description-position-over-image.title-background .title-desc-wrapper.has-main-image {
@@ -1999,6 +2030,37 @@ h1.page-title {
 }
 
 
+/* --------- Some resets we need for reordering in stacked indexes ----------- */
+body.sqs-items-reordering {
+  #parallax-images {
+    .image-container {
+      background-color: transparent;
+    }
+    .sqs-in-flight-item-parallax-image {
+      // Make sure dragged parallax images float over actual items.
+      // To make them feel a part of the same block.
+      z-index: 4;
+    }
+  }
+
+  &[data-sqs-scalefactor] {
+    #parallax-images {
+      .image-container {
+        img,
+        .sqs-video-background {
+          transform: translateY(0) !important;
+        }
+      }
+    }
+  }
+
+  [data-item].sqs-in-flight {
+    // Because we have background images elsewhere - can't treat it like normal.
+    background: transparent !important;
+  }
+}
+
+
 /* CRAPPY IE FIX
 ------------------------------------------------*/
 
@@ -2027,4 +2089,3 @@ h1.page-title {
   margin-top: 0 !important;
   position: fixed !important;
 }
-
