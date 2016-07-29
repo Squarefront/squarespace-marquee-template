@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html>
+<html class="{.if authenticatedAccount}authenticated-account{.end}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -14,7 +14,7 @@
     </script>
   </head>
 
-  <body id="{squarespace.page-id}" class="{squarespace.page-classes}{.if item}{.section item}{.main-image?} has-banner-image{.end}{.end}{.or}{.section collection}{.equal? typeName "index"}{.section collections}{.section 0}{.section mainImage} has-banner-image{.end}{.end}{.end}{.or}{.equal? typeName "album"}{.or}{.equal? typeName "gallery"}{.or}{.section mainImage} has-banner-image{.end}{.end}{.end}{.end}{.end}{.end} {.if template.mobileStylesEnabled}{.or}mobile-styles-disabled{.end}">
+  <body id="{squarespace.page-id}" class="{squarespace.page-classes}{.if item}{.section item}{.background-source-video?} has-banner-image has-banner-video{.or}{.main-image?} has-banner-image{.end}{.end}{.end}{.or}{.section collection}{.equal? typeName "index"}{.section collections}{.section 0}{.background-source-video?} has-banner-image has-banner-video{.or}{.section mainImage} has-banner-image{.end}{.end}{.end}{.end}{.or}{.equal? typeName "album"}{.or}{.equal? typeName "gallery"}{.or}{.background-source-video?} has-banner-image has-banner-video{.or}{.section mainImage} has-banner-image{.end}{.end}{.end}{.end}{.end}{.end}{.end} {.if template.mobileStylesEnabled}{.or}mobile-styles-disabled{.end}">
 
     <div id="mobileNav" data-content-field="navigation-mobileNav">
       <squarespace:navigation navigationId="mainNav" template="navigation" />
@@ -191,25 +191,33 @@
           </header>
 
           {.section collection}
-          {.equal? typeName "gallery"}
-          {.or}
-          {.equal? typeName "album"}
-          {.or}
-          {.section mainImage}
-          <div class="banner-image content-fill">
-            <img {@|image-meta} />
-            <div class="image-overlay-wrapper"></div>
-          </div>
-          {.end}
-          <div class="title-desc-wrapper{.main-image?} has-main-image{.or} no-main-image{.end}{.if description}{.or} no-description{.end}">
-            <div class="title-desc-inner" data-collection-id="{id}" data-edit-main-image="Background">
-              <div class="page-title-wrapper"><h1 class="page-title" data-content-field="title">{title}</h1></div>
-              <br> <!-- this keeps the inline-blocks from collapsing -->
-              <div class="page-desc" data-content-field="description">{description}</div>
-            </div>
-          </div>
-          {.end}
-          {.end}
+            {.equal? typeName "gallery"}
+            {.or}
+            {.equal? typeName "album"}
+            {.or}
+              {.background-source-video?}
+                <div class="banner-image content-fill">
+                  {@|apply sqs-video-background.block}
+                  <div class="image-overlay-wrapper"></div>
+                </div>
+              {.or}
+                {.section mainImage}
+                  <div class="banner-image content-fill">
+                    <img {@|image-meta} />
+                    <div class="image-overlay-wrapper"></div>
+                  </div>
+                {.end}
+              {.end}
+              <div class="title-desc-wrapper{.background-source-video?} has-main-image has-background-video{.or}{.main-image?} has-main-image{.or} no-main-image{.end}{.end}{.if description}{.or} no-description{.end}">
+                <div class="title-desc-inner" data-collection-id="{id}" data-edit-main-image="Background">
+                  <div class="page-title-wrapper"><h1 class="page-title" data-content-field="title">{title}</h1></div>
+                  <br> <!-- this keeps the inline-blocks from collapsing -->
+                  <div class="page-desc" data-content-field="description">{description}</div>
+                </div>
+              </div>
+            {.end}
+          {.end} <!-- end section -->
+
         {.end}
         </div>
 
@@ -272,9 +280,7 @@
         </footer>
 
       {squarespace-footers}
-      <squarespace:script src="rafscroll.js" combo="true" />
-      <squarespace:script src="mutation-observer.js" combo="true" />
-      <squarespace:script src="site.js" combo="true" />
+      <squarespace:script src="site-bundle.js" combo="true" />
       </div>
     </div>
 
